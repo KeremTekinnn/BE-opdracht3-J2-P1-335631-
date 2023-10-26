@@ -31,6 +31,13 @@
         </tbody>
     </table>
 
+    <?php if ($data['message']) : ?>
+        <p id="message" style="color:red"><?= $data['message'] ?></p>
+        <script>
+            setTimeout(() => document.getElementById("message").remove(), 3000);
+        </script>
+    <?php endif ?>
+
     <table>
         <thead>
             <th>TypeVoertuig</th>
@@ -41,6 +48,7 @@
             <th>RijbewijsCategorie</th>
             <th>Toevoegen</th>
             <th>Wijzigen</th>
+            <th>Verwijderen</th>
         </thead>
         <tbody>
             <?= $data['tableRows']; ?>

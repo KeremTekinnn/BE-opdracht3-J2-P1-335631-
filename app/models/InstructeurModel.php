@@ -85,7 +85,7 @@ class InstructeurModel
                 
                 WHERE       VOIN.InstructeurId is null
                 
-                ORDER BY    TYVO.RijbewijsCategorie DESC";
+                ORDER BY    VOER.Bouwjaar DESC";
 
         $this->db->query($sql);
         return $this->db->resultSet();
@@ -175,5 +175,50 @@ class InstructeurModel
         $this->db->bind(2, $instructeurId);
         $this->db->bind(3, date('Y-m-d'));
         $this->db->single();
+    }
+
+    function unassignVoertuig($voertuigId)
+    {
+        $sql = "delete from voertuiginstructeur where voertuigid = ?";
+        $this->db->query($sql);
+        $this->db->bind(1, $voertuigId);
+        $this->db->single();
+    }
+
+    function verwijderVoertuig($voertuigId)
+    {
+        $sql = "delete from voertuig where id = ?";
+        $this->db->query($sql);
+        $this->db->bind(1, $voertuigId);
+        $this->db->single();
+    }
+
+    public function getAlleVoertuigen()
+    {
+        $sql = "SELECT       VOER.Type
+                            ,VOER.Kenteken
+                            ,VOER.Bouwjaar
+                            ,VOER.Brandstof
+                            ,TYVO.TypeVoertuig
+                            ,TYVO.RijbewijsCategorie
+                            ,VOER.Id
+                            ,CONCAT(INS.Voornaam, ' ', INS.Tussenvoegsel, ' ', INS.Achternaam) as InstructeurNaam
+
+                FROM        Voertuig    AS  VOER
+                
+                INNER JOIN  TypeVoertuig AS TYVO
+
+                ON          TYVO.Id = VOER.TypeVoertuigId
+                
+                LEFT JOIN  VoertuigInstructeur AS VOIN
+                
+                ON          VOIN.VoertuigId = VOER.Id
+
+                LEFT JOIN Instructeur AS INS ON VOIN.InstructeurId = INS.Id
+                
+                ORDER BY    VOER.Bouwjaar DESC";
+
+        $this->db->query($sql);
+        return $this->db->resultSet();
     }
 }

@@ -1,5 +1,5 @@
 -- Step: 01
--- Goal: Create a new database backend-opdracht-1
+-- Goal: Create a new database backend-opdracht-2
 -- **********************************************************************************
 -- Version       Date:           Author:                     Description:
 -- *******       **********      ****************            ******************
@@ -7,13 +7,13 @@
 -- **********************************************************************************/
 
 -- Check if the database exists
-DROP DATABASE IF EXISTS `database-backend`;
+DROP DATABASE IF EXISTS `backend-opdracht-2`;
 
 -- Create a new Database
-CREATE DATABASE IF NOT EXISTS `database-backend`;
+CREATE DATABASE IF NOT EXISTS `backend-opdracht-2`;
 
--- Use database backend-opdracht-1
-Use `database-backend`;
+-- Use database backend-opdracht-2
+Use `backend-opdracht-2`;
 
 
 -- Step: 02

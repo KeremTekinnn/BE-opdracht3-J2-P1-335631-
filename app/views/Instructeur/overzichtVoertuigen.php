@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
@@ -8,8 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= URLROOT; ?>/css/style.css">
 </head>
-  <body>
-    
+
+<body>
+
     <h3><u><?= $data['title']; ?></u></h3>
 
     <table>
@@ -31,6 +33,13 @@
 
     <a href="/instructeur/overzichtBeschikbareVoertuigen/<?= $data['id'] ?>">Toevoegen Voertuig</a>
 
+    <?php if ($data['message']) : ?>
+        <p id="message" style="color:red"><?= $data['message'] ?></p>
+        <script>
+            setTimeout(() => document.getElementById("message").remove(), 3000);
+        </script>
+    <?php endif ?>
+
     <table>
         <thead>
             <th>TypeVoertuig</th>
@@ -40,6 +49,7 @@
             <th>Brandstof</th>
             <th>RijbewijsCategorie</th>
             <th>Wijzigen</th>
+            <th>Verwijderen</th>
         </thead>
         <tbody>
             <?= $data['tableRows']; ?>
@@ -51,5 +61,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  </body>
+</body>
+
 </html>
