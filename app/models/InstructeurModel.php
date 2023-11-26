@@ -56,8 +56,28 @@ class InstructeurModel
                 ON          VOIN.VoertuigId = VOER.Id
                 
                 WHERE       VOIN.InstructeurId = $Id
+
+                AND         VOIN.IsActief = 1
                 
                 ORDER BY    TYVO.RijbewijsCategorie DESC";
+
+        $this->db->query($sql);
+        return $this->db->resultSet();
+    }
+
+    public function getNietToegewezenVoertuigen($Id)
+    {
+        $sql = "SELECT       VOER.Type
+                            ,VOER.Kenteken
+                            ,VOER.Bouwjaar
+                            ,VOER.Brandstof
+                            ,VOER.Id
+
+                FROM        Voertuig    AS  VOER    
+                LEFT JOIN  VoertuigInstructeur AS VOIN
+                ON          VOIN.VoertuigId = VOER.Id
+                and         VOIN.IsActief = 1
+                WHERE       VOIN.InstructeurId IS NULL";
 
         $this->db->query($sql);
         return $this->db->resultSet();
@@ -69,7 +89,7 @@ class InstructeurModel
                             ,VOER.Kenteken
                             ,VOER.Bouwjaar
                             ,VOER.Brandstof
-                            ,TYVO.TypeVoertuig
+                            ,TYVO.TypeVoertuig12
                             ,TYVO.RijbewijsCategorie
                             ,VOER.Id
 
@@ -82,6 +102,8 @@ class InstructeurModel
                 LEFT JOIN  VoertuigInstructeur AS VOIN
                 
                 ON          VOIN.VoertuigId = VOER.Id
+
+                AND         VOIN.IsActief = 1
                 
                 WHERE       VOIN.InstructeurId is null
                 
@@ -185,6 +207,7 @@ class InstructeurModel
         $this->db->single();
     }
 
+
     function verwijderVoertuig($voertuigId)
     {
         $sql = "delete from voertuig where id = ?";
@@ -221,4 +244,5 @@ class InstructeurModel
         $this->db->query($sql);
         return $this->db->resultSet();
     }
+
 }

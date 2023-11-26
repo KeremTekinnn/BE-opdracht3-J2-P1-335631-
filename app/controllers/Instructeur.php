@@ -32,7 +32,13 @@ class Instructeur extends BaseController
                             <a href='" . URLROOT . "/instructeur/overzichtvoertuigen/$instructeur->Id'>
                                 <i class='bi bi-car-front'></i>
                             </a>
-                        </td>            
+                        </td> 
+                        <td>
+                        <a href='" . URLROOT . "/instructeur/overzichtvoertuigen/$instructeur->Id'>
+                                <i class='bi bi-hand-thumbs-up'></i>
+                            </a>
+                        </td>
+                                   
                       </tr>";
         }
 
